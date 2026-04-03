@@ -1,6 +1,7 @@
-const std = @import("std");
+const dozy = @import("dozy");
 const game = @import("game");
 
-pub fn main() !void {
+pub fn main() void {
     game.printHelloWorld();
+    dozy.start();
 }

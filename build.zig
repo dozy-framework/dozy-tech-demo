@@ -4,10 +4,15 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const game_mod = b.addModule("game", .{
-        .root_source_file = b.path("src/root.zig"),
+    const dozy_dep = b.dependency("dozy", .{
         .target = target,
+        .optimize = optimize,
     });
+    const dozy_mod = dozy_dep.module("dozy");
+
+    const game_mod = b.addModule("game", .{ .root_source_file = b.path("src/root.zig"), .target = target, .imports = &.{
+        .{ .name = "dozy", .module = dozy_mod },
+    } });
 
     const game_exe = b.addExecutable(.{
         .name = "dozy_tech_demo",
@@ -16,6 +21,7 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = optimize,
             .imports = &.{
+                .{ .name = "dozy", .module = dozy_mod },
                 .{ .name = "game", .module = game_mod },
             },
         }),
