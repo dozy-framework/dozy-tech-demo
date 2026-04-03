@@ -1,0 +1,3 @@
+[submodule "dozy"]
+	path = dozy
+	url = git@github.com:dozy-framework/dozy.git

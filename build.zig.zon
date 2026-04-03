@@ -3,7 +3,9 @@
     .version = "0.0.0",
     .fingerprint = 0x48bc1157b2f359df, // Changing this has security and trust implications.
     .minimum_zig_version = "0.15.2",
-    .dependencies = .{},
+    .dependencies = .{ .dozy = .{
+        .path = "./dozy",
+    } },
     .paths = .{
         "src",
         "build.zig",
